@@ -8,6 +8,8 @@ import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignUpPage';
 import ResetPasswordPage from './Pages/ResetPasswordPage';
+import ProfilePage from './Pages/ProfilePage';
+
 
 const Stack = createStackNavigator();
 
@@ -21,6 +23,7 @@ const App = () => {
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="SignUpPage" component={SignUpPage} />
         <Stack.Screen name="ResetPasswordPage" component={ResetPasswordPage} />
+        <Stack.Screen name="ProfilePage" component={ProfilePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

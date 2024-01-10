@@ -1,102 +1,176 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// Import the existing image
-import SecondImage from '../assets/images/proficon.png';
+const HomeScreen = () => {
+  const navigation = useNavigation();
 
-const HomePage = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.topSection}>
-        {/* Content for the top section */}
-        <Image
-          source={require('../assets/images/bgbook.jpg')}
-          style={{ width: 400, height: 250 }}
-        />
-        {/* Add your top section content here */}
-        <View style={styles.overlay}></View>
-      </View>
-      <View style={styles.bottomSection}>
-        {/* Content for the bottom section */}
-        <View style={styles.centeredContent}>
-          {/* Existing image */}
+      {/* Hamburger Icon */}
+      <TouchableOpacity
+        style={styles.hamburger}
+        onPress={() => navigation.toggleDrawer()} // Assuming you have a drawer navigator
+      >
+        <Text style={styles.hamburgerText}>&#x2630;</Text>
+      </TouchableOpacity>
+
+      {/* Home Content */}
+      <View style={styles.content}>
+        <Text style={styles.title}>CHOOSE A BOOK!</Text>
+        <Text style={styles.subtitle}>TOP SELLING BOOKS IN 2O24</Text>
+
+        {/* Display two images above */}
+        <View style={styles.imageContainer}>
           <Image
-            source={SecondImage} // Use the imported image
-            style={{ width: 80, height: 80, marginBottom: 200 }} // Reducing width and height
+            source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
+            style={styles.image}
+          />
+          <Image
+            source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
+            style={styles.image}
           />
         </View>
-        {/* Render individual TouchableOpacity components */}
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('LoginPage')}
-          >
-            <Text style={styles.buttonText}>Terms and Condition</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('SignUpPage')}
-          >
-            <Text style={styles.buttonText}>Sign Out</Text>
-          </TouchableOpacity>
-          {/* New image */}
+
+        {/* Display two images below */}
+        <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/images/signouticon.png')}
-            style={{ width: 40, height: 40, marginLeft: 10 }} // Adjust width and height as needed
+            source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
+            style={styles.image}
+          />
+          <Image
+            source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
+            style={styles.image}
           />
         </View>
+
+        {/* "View More" button */}
+        <TouchableOpacity
+          style={styles.viewMoreButton}
+          onPress={() => {
+            // Add the action you want when the "View More" button is pressed
+          }}
+        >
+          <Text style={styles.viewMoreButtonText}>View More</Text>
+        </TouchableOpacity>
+
+        {/* Categories Navigation Bar */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoriesContainer}
+        >
+          <TouchableOpacity style={styles.categoryButton}>
+            <Text style={styles.categoryButtonText}>Fiction</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.categoryButton}>
+            <Text style={styles.categoryButtonText}>Horror</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.categoryButton}>
+            <Text style={styles.categoryButtonText}>Educational</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.categoryButton}>
+            <Text style={styles.categoryButtonText}>Sci-Fi</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.categoryButton}>
+            <Text style={styles.categoryButtonText}>Documentary</Text>
+          </TouchableOpacity>
+          {/* Add more categories as needed */}
+        </ScrollView>
       </View>
     </View>
+  );
+};
+
+const Stack = createNativeStackNavigator();
+
+const HomePage = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false, // Hide the header for this screen
+        }}
+      />
+      {/* Add other screens as needed */}
+    </Stack.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column', // Arrange children in a column
+    flexDirection: 'column', // Vertical layout
+    backgroundColor: '#fff',
+    padding: 20,
+    paddingTop: 50,
   },
-  topSection: {
-    flex: 3, // 70% of the screen
-    backgroundColor: '#162F65', // Top section background color
-    justifyContent: 'center',
+  hamburger: {
+    marginRight: 16,
+  },
+  hamburgerText: {
+    fontSize: 24,
+  },
+  content: {
+    flex: 1,
     alignItems: 'center',
-    paddingTop: 40, // Increase top padding
-    paddingHorizontal: 20,
   },
-  bottomSection: {
-    flex: 11, // 30% of the screen
-    backgroundColor: '#162F65', // Mint green bottom section background color
-    alignItems: 'center', // Center content horizontally
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 3,
+    marginBottom: 10,
   },
-  overlay: {
-    alignItems: 'center', // Center content horizontally
-    marginBottom: 2, // Adjust margin bottom for the image
+  subtitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#555', // Customized color for the subtitle
   },
-  centeredContent: {
-    flexDirection: 'row', // Arrange items in a row
-    justifyContent: 'center', // Center items horizontally
-    alignItems: 'center', // Center items vertically
-    marginBottom: 20, // Adjust margin bottom for the image
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
-  buttonsContainer: {
-    flexDirection: 'row', // Arrange buttons in a row
-    alignItems: 'center', // Center items vertically
+  image: {
+    width: 150,
+    height: 200,
+    resizeMode: 'cover',
+    marginBottom: 10,
+    marginHorizontal: 10,
   },
-  button: {
-    backgroundColor: '#162F65',
+  viewMoreButton: {
+    backgroundColor: '#04a4a1',
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     borderRadius: 20,
     marginBottom: 10,
-    marginLeft: 10, // Add left margin for buttons
   },
-  buttonText: {
-    fontSize: 16,
-    color: '#ffffff',
-    textAlign: 'left', // Align button text to the left
+  viewMoreButtonText: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  verticalMargin: {
-    marginVertical: 5,
+  categoriesContainer: {
+    marginTop: 100,
+    paddingBottom: 5,
+  },
+  categoryButton: {
+    backgroundColor: '#04a4a1',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 10,
+    height: 35,
+  },
+  categoryButtonText: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
 

@@ -6,9 +6,29 @@ const LoginPage = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.overlay}>
         <View style={styles.topSection}>
-          {/* ... (existing code for the top section) */}
+          {/* Image placed at the top center */}
+          <Image
+            source={require('../assets/images/bgbgbgb.png')}
+            style={styles.image}
+          />
+          {/* Add any content for the top section */}
+          <Text style={styles.title}>LOGIN YOUR ACCOUNT</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your email"
+              placeholderTextColor="#ffffff"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your password"
+              secureTextEntry={true}
+              placeholderTextColor="#ffffff"
+            />
+          </View>
         </View>
         <View style={styles.bottomSection}>
+          {/* Add any content for the bottom section */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
@@ -17,16 +37,13 @@ const LoginPage = ({ navigation }) => {
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.button, { backgroundColor: '#2E8B57' }]} // Example different background color
-              onPress={() => {
-                /* Add navigation logic for Register button */
-              }}
+              style={styles.button}
+              onPress={() => navigation.navigate('ForgotPasswordPage')}
             >
-               style={styles.button}
-              onPress={() => navigation.navigate('SignUpPage')}
-              <Text style={styles.buttonText}>Forgot Password?</Text>
+              <Text style={styles.buttonText}>Forgot Password</Text>
             </TouchableOpacity>
-            {/* ... (existing verticalMargin view if needed) */}
+            <View style={styles.verticalMargin} />
+            {/* Add other buttons */}
           </View>
         </View>
       </View>
@@ -49,9 +66,6 @@ const styles = StyleSheet.create({
     flex: 9, // 70% of the screen
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 40, // Increase top padding
-    paddingHorizontal: 20,
-
   },
   bottomSection: {
     flex: 3, // 30% of the screen

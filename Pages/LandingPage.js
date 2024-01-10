@@ -22,6 +22,7 @@ const LandingPage = ({ navigation }) => {
               style={styles.button}
               onPress={() => navigation.navigate('LoginPage')}
             >
+              
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity

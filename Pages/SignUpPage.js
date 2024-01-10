@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const LoginPage = ({ navigation }) => {
+const SignUpPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.overlay}>
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPage;
+export default SignUpPage;
