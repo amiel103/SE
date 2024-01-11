@@ -11,10 +11,17 @@ const HomeScreen = () => {
       {/* Hamburger Icon */}
       <TouchableOpacity
         style={styles.hamburger}
-        onPress={() => navigation.toggleDrawer()} // Assuming you have a drawer navigator
+        onPress={() => navigation.navigate('HamburgerPage')} // Navigate to HamburgerPage
       >
-        <Text style={styles.hamburgerText}>&#x2630;</Text>
+        <Text style={styles.hamburgerText}>&#x2630; Mich</Text>
       </TouchableOpacity>
+
+
+      {/* Local Image */}
+      <Image
+        source={require('../assets/images/bgbgbgb.png')} // Adjust the path accordingly
+        style={styles.localImage}
+      />
 
       {/* Home Content */}
       <View style={styles.content}>
@@ -48,9 +55,7 @@ const HomeScreen = () => {
         {/* "View More" button */}
         <TouchableOpacity
           style={styles.viewMoreButton}
-          onPress={() => {
-            // Add the action you want when the "View More" button is pressed
-          }}
+          onPress={() => navigation.navigate('ViewMorePage')}
         >
           <Text style={styles.viewMoreButtonText}>View More</Text>
         </TouchableOpacity>
@@ -61,19 +66,24 @@ const HomeScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoriesContainer}
         >
-          <TouchableOpacity style={styles.categoryButton}>
+          <TouchableOpacity style={styles.categoryButton}
+           onPress={() => navigation.navigate('FictionPage')}>
             <Text style={styles.categoryButtonText}>Fiction</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryButton}>
+          <TouchableOpacity style={styles.categoryButton}
+           onPress={() => navigation.navigate('HorrorPage')}>
             <Text style={styles.categoryButtonText}>Horror</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryButton}>
+          <TouchableOpacity style={styles.categoryButton}
+           onPress={() => navigation.navigate('EducPage')}>
             <Text style={styles.categoryButtonText}>Educational</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryButton}>
+          <TouchableOpacity style={styles.categoryButton}
+           onPress={() => navigation.navigate('SciFiPage')}>
             <Text style={styles.categoryButtonText}>Sci-Fi</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.categoryButton}>
+          <TouchableOpacity style={styles.categoryButton}
+           onPress={() => navigation.navigate('DocPage')}>
             <Text style={styles.categoryButtonText}>Documentary</Text>
           </TouchableOpacity>
           {/* Add more categories as needed */}
@@ -104,15 +114,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column', // Vertical layout
-    backgroundColor: '#fff',
+    backgroundColor: '#162F65', // Updated background color
     padding: 20,
-    paddingTop: 50,
+    paddingTop: 60,
   },
   hamburger: {
     marginRight: 16,
+    marginBottom: 1,
   },
   hamburgerText: {
     fontSize: 24,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  localImage: {
+    width: '80%', // Adjust as needed
+    height: 150,   // Adjust as needed
+    resizeMode: 'cover',
+    marginBottom: 10,
+    marginTop: 10,
+    justifyContent: 'center',
+    marginLeft: 40,
   },
   content: {
     flex: 1,
@@ -123,12 +145,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 3,
     marginBottom: 10,
+    color: '#fff',
   },
   subtitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#555', // Customized color for the subtitle
+    color: '#fff', // Customized color for the subtitle
   },
   imageContainer: {
     flexDirection: 'row',
@@ -143,11 +166,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   viewMoreButton: {
-    backgroundColor: '#04a4a1',
+    backgroundColor: '#cb7400',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
     marginBottom: 10,
+    marginTop: 8,
   },
   viewMoreButtonText: {
     color: '#fff',
@@ -156,11 +180,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   categoriesContainer: {
-    marginTop: 100,
+    marginTop: 10,
     paddingBottom: 5,
   },
   categoryButton: {
-    backgroundColor: '#04a4a1',
+    backgroundColor: '#cb7400',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
