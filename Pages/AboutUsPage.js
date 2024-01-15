@@ -12,7 +12,7 @@ const AboutUsPage = ({ navigation }) => {
       <View style={styles.box}>
         {/* Description inside the box */}
         <Text style={styles.description}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tempor imperdiet. Sed maximus eros feugiat ipsum laoreet, tincidunt ullamcorper eros viverra. Pellentesque ut urna non urna luctus convallis. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam risus purus, hendrerit nec erat vitae, gravida efficitur nisl. Aliquam at mi eget dolor elementum congue quis molestie urna. Etiam ut vulputate tellus, ut ullamcorper erat. Sed efficitur mauris vel mollis suscipit. Nunc mattis dictum tincidunt. In sodales nunc sed lectus consectetur interdum. Aenean a orci at velit consectetur ultrices. Nulla vitae dignissim velit. Sed eget pretium est. Nullam molestie ante in velit hendrerit tristique.
+        AffordaBook is the ultimate platform for students to easily exchange, sell, and purchase textbooks, making the academic journey more affordable and sustainable. Our app empowers students to connect with their peers and streamline the textbook acquisition process. 
 
 
         </Text>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: 16,
     color: '#000', // Adjusted color for better visibility
   },

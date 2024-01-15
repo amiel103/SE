@@ -57,7 +57,7 @@ const HomeScreen = () => {
           style={styles.viewMoreButton}
           onPress={() => navigation.navigate('ViewMorePage')}
         >
-          <Text style={styles.viewMoreButtonText}>View More</Text>
+          <Text style={styles.viewMoreButtonText}>View Posts</Text>
         </TouchableOpacity>
 
         {/* Categories Navigation Bar */}

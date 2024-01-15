@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   buttonContainer: {
-    width: '80%',
+    width: '40%',
     marginBottom: 40,
   },
   button: {
-    backgroundColor: '#040D12',
+    backgroundColor: '#162F65',
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 20,

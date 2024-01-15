@@ -21,6 +21,8 @@ import FictionPage from './Pages/FictionPage';
 import SciFiPage from './Pages/SciFiPage';
 
 
+
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -44,6 +46,7 @@ const App = () => {
         <Stack.Screen name="DocPage" component={DocPage} />
         <Stack.Screen name="FictionPage" component={FictionPage} />
         <Stack.Screen name="SciFiPage" component={SciFiPage} />
+     
 
       </Stack.Navigator>
     </NavigationContainer>
