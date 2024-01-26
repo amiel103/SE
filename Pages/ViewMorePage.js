@@ -81,7 +81,7 @@ const ViewMorePage = () => {
       onPress={() => navigation.navigate('PostDetailsPage', { postId: item.id })}
     >
       <Image source={{ uri: 'https://placekitten.com/300/200' }} style={styles.postImage} />
-      <Text style={styles.caption}>{ item.content +'\n @' + item.user.name}</Text>
+      <Text style={styles.caption}>{ item.content +'\n@' + item.user.name}</Text>
       <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>
           &#10084; Like

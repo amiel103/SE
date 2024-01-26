@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const LoginPage = ({ navigation }) => {
 
-  const baseIP = 'http://127.0.0.1:8000'
+  // const baseIP = 'http://127.0.0.1:8000'
   
-  // const baseIP = 'http://192.168.254.149:8000'
+  const baseIP = 'http://192.168.254.149:8000'
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +38,7 @@ const LoginPage = ({ navigation }) => {
     try {
       
       // 'http://127.0.0.1:8000/api/login'
+      
       const response = await axios.post(baseIP+ '/api/login', {
         email: email,
         password: password,

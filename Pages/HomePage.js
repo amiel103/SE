@@ -49,7 +49,7 @@ const HomeScreen = () => {
       {/* Home Content */}
       <View style={styles.content}>
         <Text style={styles.title}>CHOOSE A BOOK!</Text>
-        <Text style={styles.subtitle}>TOP SELLING BOOKS IN 2O24</Text>
+        <Text style={styles.subtitle}>TOP SELLING BOOKS IN 2O24.a</Text>
 
         {/* Display two images above */}
         <View style={styles.imageContainer}>
@@ -64,7 +64,7 @@ const HomeScreen = () => {
         </View>
 
         {/* Display two images below */}
-        <View style={styles.imageContainer}>
+        {/* <View style={styles.imageContainer}>
           <Image
             source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
             style={styles.image}
@@ -73,7 +73,7 @@ const HomeScreen = () => {
             source={{ uri: 'https://placekitten.com/300/200' }} // Example placeholder image
             style={styles.image}
           />
-        </View>
+        </View> */}
 
         {/* "View More" button */}
         <TouchableOpacity
@@ -84,11 +84,11 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
         {/* Categories Navigation Bar */}
-        {/* <ScrollView
+        <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoriesContainer}
-        > */}
+        >
           <TouchableOpacity style={styles.categoryButton}
            onPress={() => navigation.navigate('FictionPage')}>
             <Text style={styles.categoryButtonText}>Fiction</Text>
@@ -110,7 +110,7 @@ const HomeScreen = () => {
             <Text style={styles.categoryButtonText}>Documentary</Text>
           </TouchableOpacity>
           {/* Add more categories as needed */}
-        {/* </ScrollView> */}
+        </ScrollView>
       
       </View>
     </View>

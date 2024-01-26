@@ -76,11 +76,33 @@ const FictionPage = () => {
       <Text style={styles.caption}>{item.caption}</Text>
       <TouchableOpacity onPress={ async() => {
         
-        const response = await axios.post(baseIP+ '/api/favorite-books', {
-          user_id: id,
-          book_title: item.caption,
-          author: item.imageUrl,
-        });
+        try {
+          const response = await axios.post(baseIP + '/api/favorite-books', {
+            user_id: id,
+            book_title: item.caption,
+            author: item.imageUrl,
+          });
+        
+          // Handle the successful response
+          console.log(response.data);
+        } catch (error) {
+          // Handle the error
+          console.error('Error:', error);
+        
+          // If needed, you can access more details about the error
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            console.error('Status:', error.response.status);
+            console.error('Data:', error.response.data);
+            console.error('Headers:', error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.error('No response received:', error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error setting up the request:', error.message);
+          }
+        }
 
         // Handle the response as needed
         console.log('Response:', response.data['message']);
