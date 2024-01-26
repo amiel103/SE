@@ -1,9 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
 
 const ProfilePage = () => {
+
+  const baseIP = 'http://127.0.0.1:8000'
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
+
+  const [post, setPost] = useState('');
+
+
+  const handlePostChange = (text) => {
+    setPost(text);
+  };
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedName = await AsyncStorage.getItem('name');
+      const storedEmail = await AsyncStorage.getItem('email');
+      const storedId = await AsyncStorage.getItem('id');
+      if (storedName !== null) {
+        setName(storedName);
+        setId(storedId);
+        setEmail(storedEmail);
+
+        console.log(storedId)
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
+
+
+
+
+
+
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -20,9 +63,18 @@ const ProfilePage = () => {
     console.log('Add a Photo clicked');
   };
 
-  const handlePost = () => {
+  const handlePost = async() => {
+
+    const storedId = await AsyncStorage.getItem('id');
+    const response = await axios.post(baseIP+ '/api/posts', {
+      user_id: storedId,
+      content: post
+    });
+
+    // Handle the response as needed
+    console.log('Response:', response.data['message']);
     // Handle the post logic here
-    console.log('Post added');
+    console.log(post);
     setModalVisible(false);
   };
 
@@ -56,8 +108,8 @@ const ProfilePage = () => {
 
       {/* User Information */}
       <View style={styles.userInfo}>
-        <Text style={styles.username}>John Doe</Text>
-        <Text style={styles.email}>john.doe@example.com</Text>
+        <Text style={styles.username}> {name}</Text>
+        <Text style={styles.email}>{email}</Text>
       </View>
 
       {/* Modal for Add Post */}
@@ -74,6 +126,7 @@ const ProfilePage = () => {
               placeholder="Write your post here..."
               style={styles.postInput}
               multiline={true}
+              onChangeText={handlePostChange}
             />
             <TouchableOpacity style={styles.addPhotoButton} onPress={handleAddPhoto}>
               <Text style={styles.addPhotoButtonText}>Add a Photo</Text>
@@ -81,7 +134,9 @@ const ProfilePage = () => {
             <TouchableOpacity style={styles.postButton} onPress={handlePost}>
               <Text style={styles.postButtonText}>Post</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.closeButton} onPress={handleCloseModal}>
+            <TouchableOpacity style={styles.closeButton} onPress={
+              handleCloseModal
+              }>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
           </View>

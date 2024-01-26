@@ -1,6 +1,8 @@
 // ViewMorePage.js
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -29,6 +31,27 @@ const data = [
 ];
 
 const HorrorPage = () => {
+
+  const baseIP = 'http://127.0.0.1:8000'
+
+  const [id, setId] = useState('');
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem('id');
+      if (storedId !== null) {
+        setId(storedId);
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
+
   const navigation = useNavigation();
   const [likedPosts, setLikedPosts] = useState([]);
 
@@ -48,7 +71,21 @@ const HorrorPage = () => {
     >
       <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
       <Text style={styles.caption}>{item.caption}</Text>
-      <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
+      <TouchableOpacity onPress={ async() => {
+
+        const response = await axios.post(baseIP+ '/api/favorite-books', {
+          user_id: id,
+          book_title: item.caption,
+          author: item.imageUrl,
+        });
+
+        // Handle the response as needed
+        console.log('Response:', response.data['message']);
+        console.log(item.caption);
+        toggleLike(item.id);
+      }
+      
+      } style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>
           &#10084; Like
         </Text>

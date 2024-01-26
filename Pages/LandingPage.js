@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 const LandingPage = ({ navigation }) => {
+
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedName = await AsyncStorage.getItem('name');
+      if (storedName !== null) {
+        setName(storedName);
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
+
+  if(name!=''){
+    navigation.navigate('HomePage')
+  }
+  
+  
+  
+  
+  
+  
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>

@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const HomeScreen = () => {
+
   const navigation = useNavigation();
+
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedName = await AsyncStorage.getItem('name');
+      if (storedName !== null) {
+        setName(storedName);
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
+
+
+
 
   return (
     <View style={styles.container}>
@@ -13,7 +36,7 @@ const HomeScreen = () => {
         style={styles.hamburger}
         onPress={() => navigation.navigate('HamburgerPage')} // Navigate to HamburgerPage
       >
-        <Text style={styles.hamburgerText}>&#x2630; Mich</Text>
+        <Text style={styles.hamburgerText}> &#x2630; {name}</Text>
       </TouchableOpacity>
 
 
@@ -61,11 +84,11 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
         {/* Categories Navigation Bar */}
-        <ScrollView
+        {/* <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoriesContainer}
-        >
+        > */}
           <TouchableOpacity style={styles.categoryButton}
            onPress={() => navigation.navigate('FictionPage')}>
             <Text style={styles.categoryButtonText}>Fiction</Text>
@@ -87,7 +110,8 @@ const HomeScreen = () => {
             <Text style={styles.categoryButtonText}>Documentary</Text>
           </TouchableOpacity>
           {/* Add more categories as needed */}
-        </ScrollView>
+        {/* </ScrollView> */}
+      
       </View>
     </View>
   );

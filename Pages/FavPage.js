@@ -1,34 +1,78 @@
 // ViewMorePage.js
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const data = [
-  {
-    id: '1',
-    caption: 'Into Thin Air\n\n for those who are interested, dm me @erusshab',
-    imageUrl: 'https://placekitten.com/300/200',
-  },
+const initialData = [
   {
     id: '2',
-    caption: 'Guns, Germs, and Steel\n\n for those who are interested, dm me @michellea',
-    imageUrl: 'https://placekitten.com/300/200',
-  },
-  {
-    id: '3',
-    caption: 'Sapiens: A Brief History of Humankind\n\n message me if you want to grab this book!',
-    imageUrl: 'https://placekitten.com/300/200',
+    book_title: 'Into Thin Air\n\n for those who are interested, dm me @erusshab',
+    author: 'https://placekitten.com/300/200',
   },
   {
     id: '4',
-    caption: 'Bad Blood: Secrets and Lies in a Silicon Valley Startup\n\n perfect for students, contact me for details!',
-    imageUrl: 'https://placekitten.com/300/200',
+    book_title: 'Guns, Germs, and Steel\n\n for those who are interested, dm me @michellea',
+    author: 'https://placekitten.com/300/200',
+  },
+  {
+    id: '3',
+    book_title: 'Sapiens: A Brief History of Humankind\n\n message me if you want to grab this book!',
+    author: 'https://placekitten.com/300/200',
+  },
+  {
+    id: '9',
+    book_title: 'Bad Blood: Secrets and Lies in a Silicon Valley Startup\n\n perfect for students, contact me for details!',
+    author: 'https://placekitten.com/300/200',
   },
   // Add more data as needed
 ];
 
 const FavPage = () => {
+
+  const baseIP = 'http://127.0.0.1:8000';
+
+  const [data, setData] = useState(initialData);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem('id');
+      if (storedId !== null) {
+        setId(storedId);
+        console.log(id)
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedId = await AsyncStorage.getItem('id');
+        console.log(storedId)
+        const response = await axios.get(baseIP+"/api/favorite-books/"+storedId);
+        console.log(response.data.data)
+        setData(response.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
   const navigation = useNavigation();
   const [likedPosts, setLikedPosts] = useState([]);
 
@@ -46,9 +90,22 @@ const FavPage = () => {
       style={styles.postContainer}
       onPress={() => navigation.navigate('PostDetailsPage', { postId: item.id })}
     >
-      <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-      <Text style={styles.caption}>{item.caption}</Text>
-      <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
+      <Image source={{ uri: item.author }} style={styles.postImage} />
+      <Text style={styles.caption}>{item.book_title}</Text>
+      <TouchableOpacity onPress={ async() =>{ 
+        const storedId = await AsyncStorage.getItem('id');
+        const response = await axios.post(baseIP+ '/api/favorite-books', {
+          user_id: storedId,
+          book_title: item.book_title,
+          author: item.author,
+        });
+
+        // Handle the response as needed
+        console.log('Response:', response.data['message']);
+        console.log(item.caption);
+        toggleLike(item.id);
+        navigation.navigate('FavPage')
+      }} style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>
           &#10084; Like
         </Text>

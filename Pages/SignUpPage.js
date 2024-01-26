@@ -1,7 +1,101 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+import axios from 'axios';
 const SignUpPage = ({ navigation }) => {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repassword, setRePassword] = useState('');
+
+
+  const handleNameChange = (text) => {
+    setName(text);
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+  };
+
+  const handleRePasswordChange = (text) => {
+    setRePassword(text);
+  };
+
+  const handleSignUp = async() => {
+    // Use the email and password values as needed
+    
+    console.log('name:', name);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Repassword:', repassword);
+
+    if(password != repassword){
+      return
+    }
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/register', {
+        name:name,
+        email: email,
+        password: password,
+      });
+
+      // Handle the response as needed
+      console.log('Response:', response.data['message']);
+      if(response.data['message'] == 'User registered successfully'){
+        
+        navigation.navigate('LandingPage')
+      }
+    } catch (error) {
+      // Handle errors
+      console.error('Error:', error);
+    }
+
+    // You can now make an API request or perform other actions with the email and password values
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   return (
     <View style={styles.container}>
       <View style={styles.overlay}>
@@ -16,20 +110,31 @@ const SignUpPage = ({ navigation }) => {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
+              placeholder="Enter your name"
+              placeholderTextColor="#ffffff"
+              onChangeText={handleNameChange}
+            />
+
+            <TextInput
+              style={styles.input}
               placeholder="Enter your email"
               placeholderTextColor="#ffffff"
+              onChangeText={handleEmailChange}
             />
+
             <TextInput
               style={styles.input}
               placeholder="Enter your password"
               secureTextEntry={true}
               placeholderTextColor="#ffffff"
+              onChangeText={handlePasswordChange}
             />
              <TextInput
               style={styles.input}
               placeholder="Re-enter your password"
               secureTextEntry={true}
               placeholderTextColor="#ffffff"
+              onChangeText={handleRePasswordChange}
             />
           </View>
         </View>
@@ -38,7 +143,11 @@ const SignUpPage = ({ navigation }) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('LandingPage')}
+              onPress={() => {
+                handleSignUp()
+                // navigation.navigate('LandingPage')
+              }
+              }
             >
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>

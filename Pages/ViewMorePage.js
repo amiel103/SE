@@ -1,34 +1,68 @@
 // ViewMorePage.js
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const data = [
+const initialData = [
   {
     id: '1',
-    caption: 'Exciting Fiction Book\n\n for those who are interested, dm me @erusshab',
+    content: 'Exciting Fiction Book\n\n for those who are interested, dm me @erusshab',
+    user:{name:"a"},
     imageUrl: 'https://placekitten.com/300/200',
   },
   {
     id: '2',
-    caption: 'Thrilling Horror Book\n\n for those who are interested, dm me @michellea',
+    content: 'Thrilling Horror Book\n\n for those who are interested, dm me @michellea',
+    user:{name:"a"},
     imageUrl: 'https://placekitten.com/300/200',
   },
+
   {
     id: '3',
-    caption: 'Amazing Sci-Fi Adventure\n\n message me if you want to grab this book!',
+    content: 'Amazing Sci-Fi Adventure\n\n message me if you want to grab this book!',
+    user:{name:"a"},
     imageUrl: 'https://placekitten.com/300/200',
   },
   {
     id: '4',
-    caption: 'Educational Masterpiece\n\n perfect for students, contact me for details!',
+    content: 'Educational Masterpiece\n\n perfect for students, contact me for details!',
+    user:{name:"a"},
     imageUrl: 'https://placekitten.com/300/200',
   },
   // Add more data as needed
 ];
 
 const ViewMorePage = () => {
+
+  const baseIP = 'http://127.0.0.1:8000';
+
+  const [data, setData] = useState(initialData);
+  
+
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        
+        const response = await axios.get(baseIP+"/api/get-posts");
+        console.log(response.data.data)
+        setData(response.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+
   const navigation = useNavigation();
   const [likedPosts, setLikedPosts] = useState([]);
 
@@ -46,8 +80,8 @@ const ViewMorePage = () => {
       style={styles.postContainer}
       onPress={() => navigation.navigate('PostDetailsPage', { postId: item.id })}
     >
-      <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-      <Text style={styles.caption}>{item.caption}</Text>
+      <Image source={{ uri: 'https://placekitten.com/300/200' }} style={styles.postImage} />
+      <Text style={styles.caption}>{ item.content +'\n @' + item.user.name}</Text>
       <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>
           &#10084; Like
