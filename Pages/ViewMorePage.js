@@ -11,33 +11,34 @@ const initialData = [
     id: '1',
     content: 'Exciting Fiction Book\n\n for those who are interested, dm me @erusshab',
     user:{name:"a"},
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '2',
     content: 'Thrilling Horror Book\n\n for those who are interested, dm me @michellea',
     user:{name:"a"},
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
 
   {
     id: '3',
     content: 'Amazing Sci-Fi Adventure\n\n message me if you want to grab this book!',
     user:{name:"a"},
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '4',
     content: 'Educational Masterpiece\n\n perfect for students, contact me for details!',
     user:{name:"a"},
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   // Add more data as needed
 ];
 
 const ViewMorePage = () => {
 
-  const baseIP = 'http://127.0.0.1:8000';
+  // const baseIP = 'http://127.0.0.1:8000';
+  const baseIP = 'http://192.168.254.149:8000'
 
   const [data, setData] = useState(initialData);
   
@@ -80,7 +81,7 @@ const ViewMorePage = () => {
       style={styles.postContainer}
       onPress={() => navigation.navigate('PostDetailsPage', { postId: item.id })}
     >
-      <Image source={{ uri: 'https://placekitten.com/300/200' }} style={styles.postImage} />
+      <Image source={{ uri: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} style={styles.postImage} />
       <Text style={styles.caption}>{ item.content +'\n@' + item.user.name}</Text>
       <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>

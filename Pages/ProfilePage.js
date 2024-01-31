@@ -7,7 +7,8 @@ import axios from 'axios';
 
 const ProfilePage = () => {
 
-  const baseIP = 'http://127.0.0.1:8000'
+  // const baseIP = 'http://127.0.0.1:8000'
+  const baseIP = 'http://192.168.254.149:8000'
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

@@ -5,6 +5,8 @@ import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'reac
 import axios from 'axios';
 const SignUpPage = ({ navigation }) => {
 
+  const baseIP = 'http://192.168.254.149:8000'
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +42,7 @@ const SignUpPage = ({ navigation }) => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/register', {
+      const response = await axios.post(baseIP+'/api/register', {
         name:name,
         email: email,
         password: password,

@@ -11,29 +11,30 @@ const data = [
   {
     id: '1',
     caption: 'GenMath Book\n\n for those who are interested, dm me @erusshab',
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '2',
     caption: 'Rizal Book\n\n for those who are interested, dm me @michellea',
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '3',
     caption: 'IT Full Course\n\n message me if you want to grab this book!',
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '4',
     caption: 'Educational Masterpiece\n\n perfect for students, contact me for details!',
-    imageUrl: 'https://placekitten.com/300/200',
+    imageUrl: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   // Add more data as needed
 ];
 
 const EducPage = () => {
 
-  const baseIP = 'http://127.0.0.1:8000'
+  // const baseIP = 'http://127.0.0.1:8000'
+  const baseIP = 'http://192.168.254.149:8000'
 
   const [id, setId] = useState('');
 

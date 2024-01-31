@@ -10,29 +10,30 @@ const initialData = [
   {
     id: '2',
     book_title: 'Into Thin Air\n\n for those who are interested, dm me @erusshab',
-    author: 'https://placekitten.com/300/200',
+    author: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '4',
     book_title: 'Guns, Germs, and Steel\n\n for those who are interested, dm me @michellea',
-    author: 'https://placekitten.com/300/200',
+    author: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '3',
     book_title: 'Sapiens: A Brief History of Humankind\n\n message me if you want to grab this book!',
-    author: 'https://placekitten.com/300/200',
+    author: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: '9',
     book_title: 'Bad Blood: Secrets and Lies in a Silicon Valley Startup\n\n perfect for students, contact me for details!',
-    author: 'https://placekitten.com/300/200',
+    author: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   // Add more data as needed
 ];
 
 const FavPage = () => {
 
-  const baseIP = 'http://127.0.0.1:8000';
+  // const baseIP = 'http://127.0.0.1:8000';
+  const baseIP = 'http://192.168.254.149:8000'
 
   const [data, setData] = useState(initialData);
   const [id, setId] = useState();

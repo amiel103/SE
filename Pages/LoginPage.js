@@ -50,7 +50,7 @@ const LoginPage = ({ navigation }) => {
 
         try {
           await AsyncStorage.setItem('name', response.data['token']['name']);
-          await AsyncStorage.setItem('id', response.data['token']['id']);
+          await AsyncStorage.setItem('id', response.data['token']['id'].toString());
           await AsyncStorage.setItem('email', response.data['token']['email']);
           console.log('Name saved successfully!');
         } catch (error) {
