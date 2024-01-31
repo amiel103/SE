@@ -41,6 +41,24 @@ const ViewMorePage = () => {
   const baseIP = 'http://192.168.254.149:8000'
 
   const [data, setData] = useState(initialData);
+
+  const [id, setId] = useState('');
+
+  useEffect(() => {
+    // Load the stored name when the component mounts
+    loadName();
+  }, []);
+
+  const loadName = async () => {
+    try {
+      const storedId = await AsyncStorage.getItem('id');
+      if (storedId !== null) {
+        setId(storedId);
+      }
+    } catch (error) {
+      console.error('Error loading name:', error);
+    }
+  };
   
 
   
@@ -50,7 +68,6 @@ const ViewMorePage = () => {
       try {
         
         const response = await axios.get(baseIP+"/api/get-posts");
-        console.log(response.data.data)
         setData(response.data.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -83,7 +100,26 @@ const ViewMorePage = () => {
     >
       <Image source={{ uri: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} style={styles.postImage} />
       <Text style={styles.caption}>{ item.content +'\n@' + item.user.name}</Text>
-      <TouchableOpacity onPress={() => toggleLike(item.id)} style={styles.likeButton}>
+      <TouchableOpacity onPress={ async() =>{ 
+
+        console.log(id)
+        console.log(item.content)
+
+
+        const response = await axios.post(baseIP+ '/api/favorite-books', {
+
+          user_id: id,
+          book_title: item.content,
+          author: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        });
+
+        // Handle the response as needed
+        console.log('Response:', response.data['message']);
+        console.log(item.caption);
+        
+        toggleLike(item.id) 
+      }
+        } style={styles.likeButton}>
         <Text style={likedPosts.includes(item.id) ? styles.likeTextActive : styles.likeText}>
           &#10084; Like
         </Text>
